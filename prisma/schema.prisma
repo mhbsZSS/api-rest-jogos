@@ -1,0 +1,34 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Genero {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  jogos Jogo[]
+}
+
+model Plataforma {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  jogos Jogo[] // Relação N:N implícita
+}
+
+model Jogo {
+  id          Int          @id @default(autoincrement())
+  titulo      String
+  idGenero    Int
+  
+  // Relacionamento 1:N (Um jogo tem um gênero)
+  genero      Genero       @relation(fields: [idGenero], references: [id])
+  
+  // Relacionamento N:N (Um jogo tem várias plataformas)
+  plataformas Plataforma[] 
+}
