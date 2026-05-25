@@ -25,11 +25,10 @@ app.post('/plataformas', async (req: Request, res: Response) => {
     res.status(201).json(plataforma);
 });
 
-// 3. Cadastrar Jogos (E já relacionar com plataformas, se existirem)
+// 3. Cadastrar Jogos 
 app.post('/jogos', async (req: Request, res: Response) => {
     const { titulo, idGenero, idsPlataformas } = req.body;
 
-    // Mapeia os IDs das plataformas para o formato que o Prisma exige
     const plataformasConectar = idsPlataformas?.map((id: number) => ({ id })) || [];
 
     const jogo = await prisma.jogo.create({
@@ -40,7 +39,7 @@ app.post('/jogos', async (req: Request, res: Response) => {
                 connect: plataformasConectar
             }
         },
-        include: { // Retorna o jogo recém criado já com seus relacionamentos
+        include: { 
             genero: true,
             plataformas: true
         }
@@ -81,5 +80,5 @@ app.get('/jogos', async (req: Request, res: Response) => {
 });
 
 app.listen(3000, () => {
-    console.log('🚀 Servidor rodando na porta 3000');
+    console.log('Servidor rodando na porta 3000');
 });

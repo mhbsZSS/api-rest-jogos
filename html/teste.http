@@ -14,8 +14,7 @@ Content-Type: application/json
   "nome": "Super Nintendo"
 }
 
-### 3. Criar um Jogo (Formato Simples)
-# O idGenero 1 deve ser o "Plataforma" que criamos acima.
+### 3. Criar um Jogo
 POST http://localhost:3000/jogos
 Content-Type: application/json
 
@@ -24,9 +23,7 @@ Content-Type: application/json
   "idGenero": 1
 }
 
-### 4. Relacionar Jogo existente com uma Plataforma 
-# ATENÇÃO AQUI: Mudamos a rota para /jogos/:id/plataformas
-# O "1" na URL é o ID do Jogo. O "1" no JSON é o ID da Plataforma.
+### 4. Relacionar Jogo existente com uma Plataforma
 POST http://localhost:3000/jogos/1/plataformas
 Content-Type: application/json
 
@@ -35,14 +32,10 @@ Content-Type: application/json
 }
 
 ### 5. Listar todos os dados cadastrados
-# Vai retornar o Super Mario World com o gênero "Plataforma" e vinculado ao "Super Nintendo"
 GET http://localhost:3000/jogos
 
 
-### -------------------------------------------------------------------
-### 🐈 PULO DO GATO: Teste Bônus (Criar jogo e relacionar ao mesmo tempo)
-### Lembra que preparamos o backend para receber um array de plataformas?
-### Se você rodar este bloco, ele cria o Sonic e já vincula às plataformas!
+#### 6. Criar outro Jogo
 POST http://localhost:3000/jogos
 Content-Type: application/json
 
